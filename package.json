@@ -1,0 +1,25 @@
+{
+  "name": "awesomecontact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Njuguna Charles Kiarie",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-mongodb-session": "^2.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mail-time": "^1.0.2",
+    "mongodb": "^3.1.13",
+    "nodemailer": "^5.1.1",
+    "nodemon": "^1.18.9"
+  }
+}
