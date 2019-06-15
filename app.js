@@ -32,6 +32,6 @@ app.use(session({
 app.use(routes);
 
 mongoConnect(client => {
-	console.log(client);
+	//console.log(client);
 	app.listen(PORT);
 });

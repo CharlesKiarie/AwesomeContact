@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>awesomeContact: A contact form backend for your static site.</title>
+	<!-- <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900&display=swap" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="/css/skeleton.css">
+	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<div>
+	<div class="flair"></div>
+		<nav class="navbar">
+			<h5 class="logo fw-black mt-1">awesomeContact.</h5>
+			<ul class="nav-links mt-1">
+				<li class="nav-item fw-medium"><a href="#">Documentation</a></li>
+				<li class="nav-item fw-medium"><a href="#">Billing</a></li>
+				<li class="nav-item fw-medium"><a href="#">Log out</a></li>
+			</ul>
+		</nav>
+</div>
+<div class="container">
+	<h1 class="fw-black mt-2 pb-1">Your emails.</h1>
+	<form method="POST" action="/delete">
+		<label>email@email.com</label>
+		<input type="email" name="email" value="email@email.com">
+		<button type="submit">Delete</button>
+	</form>
+	<p class="mt-1">Copy and add the method below to your form.</p>
+	<pre><code>
+action="/api/v1:youremail@email.com"	
+	</code></pre>
+	<form method="POST" action="/add">
+		<label>Add an email.</label>
+		<input type="email" name="email" placeholder="youremail@email.com">
+		<button type="submit">Add</button>
+	</form>
+</div>
+
+
+
+<footer class="mt-3 text-center">
+	<p>Follow us on:</p>
+	<a href="">Twitter</a>
+	<a href="">Facebook</a>
+	<a href="">indieHackers</a>
+	<p>&copyawesomeContact 2019</p>
+</footer>
+</body>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>awesomeContact: A contact form backend for your static site.</title>
+	<!-- <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900&display=swap" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="../public/css/skeleton.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/style.css">
+</head>
+<body>
+		<header class="hero">
+			<div class="flair"></div>
+			<nav class="navbar">
+				<h5 class="logo fw-black mt-1">awesomeContact.</h5>
+					<ul class="nav-links mt-1">
+						<li class="nav-item fw-medium"><a href="#">Sign up</a></li>
+						<li class="nav-item fw-medium"><a href="#">Sign in</a></li>
+					</ul>
+				</nav>
+			<div class="container">
+				<h1 class="fw-black display-10 pt-5">awesomeContact.</h1>
+				<h3>We are a mailer api for your contact form that works with anything from wordpress to awesome static websites.</h3>
+				<button class="button btn-main text-center mt-10">Get started today for $9.99</button>
+			</div>
+		</header>
+		<div class="container">	
+			<section id="how it works">
+				<h1 class="pt-1 mt-1 text-center fw-semi-bold">How it Works</h1>
+				<h3>Setup</h3>
+				<pre><code>
+	form method="POST" <span class="highlight">action="/api/v1:youremail@email.com"</span>
+	input class="u-full-width" type="email"  placeholder="First name" <span class="highlight">name="firstname"</span>
+	input type="email" <span class="highlight">name="email"</span> placeholder="name@email.com" 
+	textarea class="u-full-width" placeholder="Hi Dave …" <span class="highlight">name="message"</span>
+	input class="button-primary" type="submit" value="Submit"
+				</code></pre>
+				<p>Add our unique url to your form action. Make sure you use the name attribute so our backend recieves your form data.</p>
+				<h3>Result</h3>
+				<pre><code>
+					.some-class {
+					  background-color: red;
+					}
+				</code></pre>
+				<p>Once our back-end does its thing you will find a beautifully formatted email in your inbox.</p>
+				<h3>Thank you</h3>
+				<pre><code>
+	input type="hidden" <span class="highlight">name="thankyou"</span> <span class="highlight">value="http://mythankyoupage.com"</span> 
+				</code></pre>
+				<p>Your user are directed to our thank you page....dont worry you can link them to your custom made one.</p>
+			</section>
+			
+			<section id="price">
+				<h1 class="pt-1 pb-2 mt-1 text-center fw-semi-bold">Pricing</h1>
+				<div class="row text-center">
+					<div class="four columns fw-semi-bold">
+						<h3>$5.99/month</h3>
+						<p>Upto 2 unique contact forms.</p>
+						<p>Up to 10,000 emails.</p>
+						<p>Reliable support.</p>
+					</div>
+					<div class="four columns fw-semi-bold">
+						<h3 class="fw-bold">$9.99/month</h3>
+						<p>Upto 5 unique contact forms.</p>
+						<p>Up to 10,000 emails.</p>
+						<p>Reliable support.</p>
+					</div>
+					<div class="four columns">
+						<h3>$80/year</h3>
+						<p>Upto 5 unique contact forms.</p>
+						<p>Unlimited emails.</p>
+						<p>Reliable support.</p>
+						<p>4 months free</p>
+					</div>
+				</div>
+				<button class="button btn-alt text-center mt-1">Get started today</button>
+			</section>
+
+			<footer class="mt-3">
+				<p>Follow us on:</p>
+				<a href="">Twitter</a>
+				<a href="">Facebook</a>
+				<a href="">indieHackers</a>
+				<p>&copyawesomeContact 2019</p>
+			</footer>
+		</div>
+</body>
+</html>

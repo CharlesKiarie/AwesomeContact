@@ -2,18 +2,24 @@
 <html>
 <head>
 	<title>Log in</title>
-	<link rel="stylesheet" type="text/css" href="css/skeleton.css">
-	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/css/skeleton.css">
+	<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h3>Log in</h3>
 	<div class="container">
+		<h3 class="fw-black mt-3">Log in</h3>
+		<% if(Object.keys(errors).length > 0) { %>
+			<% for (const key of Object.keys(errors)) { %>
+			    <p class="text-warning"><%=errors[key]%><p>
+			<% } %>
+		<% } %>
 		<form method="POST" action="/login">
-			<label for="email">Your email</label>
+			<label for="email">Email</label>
 	     	<input class="u-full-width" type="email" name="email" placeholder="name@email.com" id="email">
 	     	<label for="password">Password</label>
 	      	<input class="u-full-width" type="password" name="password" id="password">
-	     	<button class="button-primary" type="submit" value="Submit">Log in</button>
+	     	<button class="button-primary mt-1" type="submit" value="Submit">Log in</button>
 		</form>
 	</div>
 </body>

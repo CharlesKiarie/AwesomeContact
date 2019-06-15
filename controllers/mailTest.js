@@ -31,7 +31,7 @@ exports.postEmail = (req, res) => {
 	//redirect to thank you page
 	res.json({success : "Updated Successfully", status : 200});
 	res.writeHead(301, {Location: `${thanks}`});
-	res.end();
+	return res.end();
 };
 
 const sendEmail = () => {

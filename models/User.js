@@ -4,7 +4,9 @@ const getDb = require('../utils/database').getDb;
 class User {
 	constructor(email, password) {
 		this.email = email;
-		this.password = password; 
+		this.password = password;
+		this.subscription = 'monthly';
+		this.emailCount = '5'; 
 	}
 
 

@@ -1,21 +1,34 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const validateSignup = require('../validation/signup');
+const validateLogin = require('../validation/login');
 
 exports.getSignup = (req, res) => {
 	res.render('signup', {
-		isAuthenticated: false
+		isAuthenticated: false,
+		errors: {}
 	});
 };
 
 exports.postSignup = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
-	const confirmPassword = req.body.confirmPassword;
+	console.log(req.body);
+
+	const { errors, isValid } = validateSignup(req.body);
+	if (!isValid) {
+		return res.status(400).render('signup', {
+			errors: errors
+		});
+	}
 
 	User.findUser(email)
 	.then(user => {
 		if (user) {
-			return res.redirect('/login'); //You exist please log in
+			errors.email = "Email already exists please login.";
+			return res.render('login', {
+				errors: errors
+			}); //You exist please log in
 		}
 		return bcrypt.hash(password, 12)
 		.then(hashedPassword => {
@@ -26,17 +39,23 @@ exports.postSignup = (req, res) => {
 		return user.save();
 		})
 		.then(result => {
-			res.redirect('/login'); //Log in you account has been created
+			errors.email = "Your account has been created please login.";
+			res.render('login', {
+				errors: errors
+			}); //Log in you account has been created
 		});
 	})
 	.catch(err => {
-		console.log(err);
+		//console.log(err);
+		errors.server = "Server is down please try again.";
+		return res.status(500).json(errors);
 	});
 };
 
 exports.getLogin = (req, res) => {
-	res.render('Login', {
-		isAuthenticated: false
+	res.render('login', {
+		isAuthenticated: false,
+		errors: {}
 	});
 };
 
@@ -44,34 +63,50 @@ exports.postLogin = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
 
+	const { errors, isValid } = validateLogin(req.body);
+	if (!isValid) {
+		return res.status(400).render('login', {
+			errors: errors
+		});
+	}
+
 	User.findUser(email)
 	.then(user => {
 		if (!user) {
-			return res.redirect('/login'); //Wrong email or no account
-			//res.send("Wrong email or no account");
+			errors.email = "Email does not exist or using wrong account";
+			return res.render('login', {
+				errors: errors
+			}); //Wrong email or no account
 		}
 		bcrypt.compare(password, user.password)
 		.then(match => {
 			if (match) {
-				console.log(user);
 				req.session.isAuthenticated = true;
 				req.session.user = user;
 				return req.session.save(err => {
-					console.log(err);
-					res.redirect('/dashboard');
-					//res.send("Its Working");
+					res.render('dashboard');
 				});
 			}
-			res.redirect('/login'); //Wrong password
-			//res.send("Wrong password");
+			error.password = "Password failed use your correct password1.";
+			res.render('login', {
+				errors: errors
+			}); 
 		})
 		.catch(err => {
 			console.log(err);
-         	res.redirect('/login');
-         	//res.send("Not Working");
+			errors.server = "Password failed use your correct password2.";
+         	res.render('login', {
+         		errors: errors
+         	}); //Wrong password
 		});
 	})
-	.catch(err => console.log(err));
+	.catch(err => {
+		console.log(err)
+		errors.server = "Server is down please try again2.";
+		return res.render('login', {
+     		errors: errors
+     	});
+	});
 };
 
 exports.postLogout = (req, res, next) => {
