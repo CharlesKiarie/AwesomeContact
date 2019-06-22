@@ -8,6 +8,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const User = require('./models/user');
 const mongoConnect = require('./utils/database').mongoConnect;
 const routes = require('./routes/routes');
 
@@ -29,6 +30,21 @@ app.use(session({
 	saveUninitialized: false,
 	store: store
 }));
+
+app.use((req, res, next) => {
+	if(!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
+	.then(user => {
+		req.user = user;
+		//console.log(user);
+		next();
+	})
+	.catch(err => console.log(err));
+
+});
+
 app.use(routes);
 
 mongoConnect(client => {
