@@ -5,7 +5,7 @@ let _db;
 
 const mongoConnect = (callback) => {
 	mongoClient.connect(
-		'mongodb://localhost:27017/test', { useNewUrlParser: true } 
+		'mongodb+srv://charles:<kOtAVHRqXQtur153>@cluster0-9d7mj.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true } 
 	)
 		.then(client => {
 			console.log("Database Connected");
@@ -27,3 +27,5 @@ const getDb = () => {
 
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
+
+// 'mongodb://localhost:27017/test'
