@@ -19,6 +19,10 @@ html {
 	padding: 0;
 }
 
+.color-purple {
+	color: #6f1fc8;
+}
+
 .text-center {
 	text-align: center;
 	margin: auto;

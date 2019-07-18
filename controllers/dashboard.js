@@ -6,7 +6,6 @@ exports.getDashboard = (req, res, next) => {
 	const user = req.user;
 	const userId = user._id;
 	const emailValues = user.emailValues;
-	console.log(userId);
 
 	// find and display all email values
 	res.render('dashboard', {

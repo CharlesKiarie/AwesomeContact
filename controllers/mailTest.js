@@ -39,7 +39,6 @@ exports.postEmail = (req, res) => {
 	//check if email is a paying user
 	//redirect to thank you page
 	res.redirect(301, thanks);
-	res.json({success : "Updated Successfully", status : 200});
 	return res.end();
 };
 

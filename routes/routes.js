@@ -14,7 +14,7 @@ router.get('/success', indexController.getSuccess);
 router.get('/error', indexController.getError);
 router.get('/billing', indexController.getBilling);
 router.get('/contact', indexController.getContact);
-router.post('/awesomecontact/:email', mailController.postEmail);
+router.post('/api/v1/:id/:email', mailController.postEmail);
 
 router.get('/signup', authController.getSignup);
 router.post('/signup', authController.postSignup);

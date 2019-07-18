@@ -26,6 +26,7 @@
 			    <p class="text-warning"><%=errors[key]%><p>
 			<% } %>
 		<% } %>
+
 	<% emailValues.forEach(emailValue => { %>
 	<form method="POST" action="/delete">
 		<label><%= emailValue.emailValue %></label>
@@ -34,7 +35,7 @@
 	</form>
 	<p class="mt-1">Copy and add the method below to your form.</p>
 	<pre><code>
-action="/api/v1/<%= userId %>/<%= emailValue.emailValue %>"	
+action="https://awesomecontact.me/api/v1/<%= userId %>/<%= emailValue.emailValue %>"	
 	</code></pre>
 	<% }) %>
 	<form method="POST" action="/add">
