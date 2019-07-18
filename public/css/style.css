@@ -74,6 +74,14 @@ html {
 	color: white;
 }
 
+.link-main {
+	color: #6f1fc8;
+}
+
+.link-main:hover {
+	color: #78c81f;
+}
+
 .text-success {
 	color: #78c81f;
 }

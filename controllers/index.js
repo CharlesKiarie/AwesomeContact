@@ -14,6 +14,14 @@ exports.getError = (req, res) => {
 	res.render('error');
 };
 
+exports.getBilling = (req, res) => {
+	res.render('billing');
+};
+
+exports.getContact = (req, res) => {
+	res.render('contact');
+};
+
 // exports.postEmail = (req, res) => {
 // 	console.log(req.body);
 // 	const email = req.body.email;

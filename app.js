@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const User = require('./models/user');
+const errorController = require('./controllers/error');
 const mongoConnect = require('./utils/database').mongoConnect;
 const routes = require('./routes/routes');
 
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use(routes);
+app.use(errorController.get404);
 
 mongoConnect(client => {
 	//console.log(client);

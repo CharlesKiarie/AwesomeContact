@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+	<div class="flair"></div>
 	<div class="container">
 		<h3 class="fw-black mt-3">awesomeContact | Sign up</h3>
 		<% if(Object.keys(errors).length > 0) { %>
@@ -21,8 +22,9 @@
 	      	<input class="u-full-width" type="password" name="password" id="password">
 	      	<label for="confirm_password">Confirm Password</label>
 	     	<input class="u-full-width" type="password" name="password2" id="confirm_password">
-	     	<button class="button-primary mt-1" type="submit" value="Submit">Sign up</button>
+	     	<button class="button btn-main mt-1" type="submit" value="Submit">Sign up</button>
 		</form>
+		<p class="text-center">Already have an account? <a class="link-main" href="/login">Log in</a></p>
 	</div>
 </body>
 </html>

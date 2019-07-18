@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 const indexController = require('../controllers/index');
@@ -11,14 +12,20 @@ const dashboardController = require('../controllers/dashboard');
 router.get('/', indexController.getIndex);
 router.get('/success', indexController.getSuccess);
 router.get('/error', indexController.getError);
-router.post('/contact', mailController.postEmail);
+router.get('/billing', indexController.getBilling);
+router.get('/contact', indexController.getContact);
+router.post('/awesomecontact/:email', mailController.postEmail);
 
 router.get('/signup', authController.getSignup);
 router.post('/signup', authController.postSignup);
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
-router.get('/dashboard', dashboardController.getDashboard);
-router.post('/add', dashboardController.postAddress);
+router.get('/dashboard', isAuth, dashboardController.getDashboard);
+router.post('/add', isAuth, dashboardController.pushEmailValues);
+router.get('/add', isAuth, dashboardController.getDashboard);
+router.post('/delete', isAuth, dashboardController.pullEmailValues);
+router.get('/delete', isAuth, dashboardController.getDashboard);
+
 
 
 module.exports = router;

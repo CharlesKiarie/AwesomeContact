@@ -1,37 +1,96 @@
 const User = require('../models/User');
-const Address = require('../models/Address');
 const ObjectId = require('mongodb').ObjectId;
+const validateEmail = require('../validation/email');
 
-exports.getDashboard = (req, res) => {
+exports.getDashboard = (req, res, next) => {
+	const user = req.user;
+	const userId = user._id;
+	const emailValues = user.emailValues;
+	console.log(userId);
+
+	// find and display all email values
 	res.render('dashboard', {
-		isAuthenticated: req.session.isAuthenticated
+		isAuthenticated: req.session.isAuthenticated,
+		errors: {},
+		userId,
+		emailValues: emailValues
 	});
 };
 
-exports.postAddress = (req, res) => {
+exports.pushEmailValues = (req, res, next) => {
 	const user = req.user;
 	const userId = user._id;
-	const userEmail = user.email;
 	const emailCount = user.emailCount;
-	console.log(userId);
+	const emailValues = user.emailValues;
+	console.log(emailValues.length);
 
-	const emailValues = [];
-	emailValues.push(req.body.email);
+	const emailValue = req.body.email;
+
+	const { errors, isValid } = validateEmail(req.body);
+	if (!isValid) {
+		return res.render('dashboard', {
+			errors: errors,
+			emailValues: emailValues,
+			isAuthenticated: req.session.isAuthenticated
+		});
+	}
 	
-	Address.findById(ObjectId("5d0a7c54ad546f36f842902e"))
+	User.findById(ObjectId(userId))
 	.then(user => {
 		if(user) {
-			//console.log(user);
+			if (emailValues.length < emailCount) {
+				User.pushEmailValues(userId, emailValue)
+				.then(result => {
+					console.log(result);
+					res.render('dashboard', {
+						isAuthenticated: req.session.isAuthenticated,
+						errors: errors,
+						emailValues: emailValues
+					});
+				})
+				.catch(err => console.log(err));
+			}
+			errors.message = "Cannot add new value";
+			res.render('dashboard', {
+				isAuthenticated: req.session.isAuthenticated,
+				errors: errors,
+				emailValues: emailValues
+			});
 		}
-		//save new model
-		// const address = new Address(user, emailValues);
-		// return address.save()
-		// .then(result => {
-		// 	res.render('dashboard', {
-		// 		isAuthenticated: req.session.isAuthenticated
-		// 	});
-		// })
-		// .catch(err => console.log(err));	
 	})
 	.catch(err => console.log(err));
+	res.redirect('dashboard');
+};
+
+exports.pullEmailValues = (req, res, next) => {
+	const user = req.user;
+	const userId = user._id;
+	const emailCount = user.emailCount;
+	const emailValues = user.emailValues;
+
+	const emailValue = req.body.email;
+
+	User.findById(ObjectId(userId))
+	.then(user => {
+		if(user) {
+				User.pullEmailValues(userId, emailValue)
+				.then(result => {
+					console.log(result);
+					errors.message = "Item  has been deleted";
+					res.render('dashboard', {
+						isAuthenticated: req.session.isAuthenticated,
+						errors: errors,
+						emailValues: emailValues
+					});
+				})
+				.catch(err => console.log(err));			
+		}
+		res.render('dashboard', {
+			isAuthenticated: req.session.isAuthenticated,
+			errors: errors,
+			emailValues: emailValues
+		});
+	})
+	.catch(err => console.log(err));
+	res.redirect('dashboard');
 };

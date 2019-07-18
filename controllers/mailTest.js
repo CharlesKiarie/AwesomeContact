@@ -6,35 +6,44 @@ const getDb = require('../utils/database').getDb;
 const transports = [];
 
 transports.push(nodemailer.createTransport({
-  service: 'Gmail',
-		auth: {
-			user: 'kiariecharles77@gmail.com',
-			pass: 'megasxlrunderground'
-		}
+	host: 'email-smtp.eu-west-1.amazonaws.com',
+ 	port: 465,
+ 	secure: true,
+	auth: {
+		user: process.env.AWS_USER,
+		pass: process.env.AWS_KEY
+	}
 }));
 
+// transports.push(nodemailer.createTransport({
+// service: 'Gmail',
+// 		auth: {
+// 			user: 'kiariecharles77@gmail.com',
+// 			pass: 'ilvdxpomydyyhfqz'
+// 		}
+// }));
 
 exports.postEmail = (req, res) => {
-	console.log(req.body);
-	const email = req.body.email;
+	const toEmail = req.params.email;
+	const fromEmail = req.body.email;
 	const subject = req.body.subject;
 	const message = req.body.message;
-	
-	let thanks = req.body.thanks;
-	if (thanks === null || thanks === undefined) {
-		thanks = "https://google.com";
+
+	let thanks = req.body.thanks
+	if (thanks === null || thanks === undefined || thanks == "") {
+		thanks = "https://awesomecontact.me/thankyou/";
 	}
 	
-	sendEmail(email, subject, message);
+	sendEmail(toEmail, fromEmail, subject, message);
 
 	//check if email is a paying user
 	//redirect to thank you page
+	res.redirect(301, thanks);
 	res.json({success : "Updated Successfully", status : 200});
-	res.writeHead(301, {Location: `${thanks}`});
 	return res.end();
 };
 
-const sendEmail = () => {
+const sendEmail = (toEmail, fromEmail, subject, message) => {
 
 	const db = getDb();
 
@@ -53,12 +62,20 @@ const sendEmail = () => {
 	    template: MailTime.Template // Use default template
 	  });
 
+	// var mailOptions = {
+	// 	from: 'Charles <kiariecharles77@gmail.com>',
+	// 	to: 'kiariecharles77@gmail.com',
+	// 	subject: 'This is from awesome contact mailt-time',
+	// 	text: `It works.`,
+	// 	html: `<p>It works</p>`
+	// };
+
 	var mailOptions = {
-		from: 'Charles <kiariecharles77@gmail.com>',
-		to: 'kiariecharles77@gmail.com',
-		subject: 'This is from awesome contact mailt-time',
-		text: `It works.`,
-		html: `<p>It works</p>`
+		from: fromEmail,
+		to: toEmail,
+		subject: subject,
+		text: message,
+		html: `<p>${message}</p>`
 	};
 
 

@@ -65,7 +65,7 @@ exports.postLogin = (req, res) => {
 
 	const { errors, isValid } = validateLogin(req.body);
 	if (!isValid) {
-		return res.status(400).render('login', {
+		return res.status(303).render('login', {
 			errors: errors
 		});
 	}
@@ -84,7 +84,7 @@ exports.postLogin = (req, res) => {
 				req.session.isAuthenticated = true;
 				req.session.user = user;
 				return req.session.save(err => {
-					res.render('dashboard');
+				res.redirect('dashboard');
 				});
 			}
 			error.password = "Password failed use your correct password1.";
@@ -112,6 +112,6 @@ exports.postLogin = (req, res) => {
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
     console.log(err);
-    res.redirect('/');
+    res.status(303).redirect('/');
   });
 };

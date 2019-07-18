@@ -10,7 +10,7 @@ class Address {
 
 	save() {
 		const db = getDb();
-		return db.collection('address')
+		return db.collection('user')
 		.insertOne(this)
 		.then(result => {
 			console.log(result);
@@ -22,7 +22,7 @@ class Address {
 
 	static findUser(email) {
 		const db = getDb();
-		return db.collection('address')
+		return db.collection('user')
 		.findOne({email: email})
 		.then(user => {
 			return user;
@@ -32,44 +32,7 @@ class Address {
 		});
 	}
 
-	static findById(userId) {
-	    const db = getDb();
-	    return db.collection('address')
-	      .findOne({ "_id": userId })
-	      .then(user => {
-	        console.log(user);
-	        return user;
-	      })
-	      .catch(err => {
-	        console.log(err);
-	      });
-	}
-
-	static pushEmailValues(userId, emailValue) {
-		const db = getDb();
-		return db.collection('address')
-		.update(
-			{"_id": userId}, 
-			{"$push": {"emailValue": {emailValue}}}
-		)
-		.then(result => {
-			console.log(result);
-		})
-		.catch(err => console.log(err));
-	}
-
-	static pullEmailValues(userId, emailValue) {
-		const db = getDb();
-		return db.collection('address')
-		.update(
-			{"_id": userId}, 
-			{"$pull": {"emailValue": {emailValue}}}
-		)
-		.then(result => {
-			console.log(result);
-		})
-		.catch(err => console.log(err));
-	}
+	
 }
 
 module.exports = Address;
