@@ -22,6 +22,10 @@ exports.getContact = (req, res) => {
 	res.render('contact');
 };
 
+exports.getThankYou = (req, res) => {
+	res.render('thankyou');
+};
+
 // exports.postEmail = (req, res) => {
 // 	console.log(req.body);
 // 	const email = req.body.email;
