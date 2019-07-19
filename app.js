@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const User = require('./models/user');
+const User = require('./models/User');
 const errorController = require('./controllers/error');
 const mongoConnect = require('./utils/database').mongoConnect;
 const routes = require('./routes/routes');
