@@ -10,6 +10,7 @@
   "author": "Njuguna Charles Kiarie",
   "license": "UNLICENSED",
   "dependencies": {
+    "aws-smtp-credentials": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-mongodb-session": "^2.1.1",
@@ -20,6 +21,7 @@
     "mail-time": "^1.0.2",
     "mongodb": "^3.1.13",
     "nodemailer": "^5.1.1",
+    "nodemailer-ses-transport": "^1.5.1",
     "nodemon": "^1.18.9",
     "validator": "^10.11.0"
   }

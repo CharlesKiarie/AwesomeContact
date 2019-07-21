@@ -10,8 +10,8 @@ transports.push(nodemailer.createTransport({
  	port: 465,
  	secure: true,
 	auth: {
-		user: process.env.AWS_USER,
-		pass: process.env.AWS_KEY
+		user: 'AKIASU6QDXYCL5P4QR5P',
+		pass: 'BCJrfy9y+IdvHJdLfTsOB4WtUTaABmtYZ9Zmb39jF46q'
 	}
 }));
 
@@ -34,10 +34,12 @@ exports.postEmail = (req, res) => {
 		thanks = "https://awesomecontact.me/thankyou/";
 	}
 	
+
 	sendEmail(toEmail, fromEmail, subject, message);
 
 	//check if email is a paying user
 	//redirect to thank you page
+
 	res.redirect(301, thanks);
 	return res.end();
 };
