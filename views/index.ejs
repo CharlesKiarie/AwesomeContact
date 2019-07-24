@@ -13,6 +13,7 @@
 			<nav class="navbar">
 				<h5 class="logo fw-black mt-1">awesomeContact.</h5>
 					<ul class="nav-links mt-1">
+						<li class="nav-item fw-medium"><a href="">Documentation</a></li>
 						<li class="nav-item fw-medium"><a href="/signup">Sign up</a></li>
 						<li class="nav-item fw-medium"><a href="/login">Sign in</a></li>
 					</ul>
@@ -20,7 +21,7 @@
 			<div class="container">
 				<h1 class="fw-black display-10 pt-5">awesomeContact is all you need to get your contact forms working.</h1>
 				<h3 class="">We are a mailer api for your contact form that works with awesome static websites.</h3>
-				<button class="button btn-main text-center mt-5" onclick="window.location.href = '/signup'">Get started today for $9.99</button>
+				<button class="button btn-main text-center mt-5" onclick="window.location.href = '/signup'">Get started today for $5.99</button>
 			</div>
 		</header>
 		<div class="container">	
@@ -29,9 +30,9 @@
 				<h3>Setup</h3>
 				<pre><code>
 	form method="POST" <span class="highlight">action="/api/v1:youremail@email.com"</span>
-	input class="u-full-width" type="email"  placeholder="First name" <span class="highlight">name="firstname"</span>
-	input type="email" <span class="highlight">name="email"</span> placeholder="name@email.com" 
-	textarea class="u-full-width" placeholder="Hi Dave …" <span class="highlight">name="message"</span>
+	input type="email" <span class="highlight">name="email"</span>
+	input type="text" <span class="highlight">name="subject"</span>
+	textarea placeholder="Hi Charles…" <span class="highlight">name="message"</span> textarea
 	input class="button-primary" type="submit" value="Submit"
 				</code></pre>
 				<p>Add our unique url to your form action. Make sure you use the name attribute so our backend recieves your form data.</p>
@@ -44,9 +45,10 @@
 				<p>Once our back-end does its thing you will find a beautifully formatted email in your inbox.</p>
 				<h3>Thank you</h3>
 				<pre><code>
-	input type="hidden" <span class="highlight">name="thankyou"</span> <span class="highlight">value="http://mythankyoupage.com"</span> 
+	input type="hidden" <span class="highlight">name="thanks"</span> <span class="highlight">value="http://mywebsite.com/thankyou"</span> 
 				</code></pre>
 				<p>Your user are directed to our thank you page....dont worry you can redirect them to your custom made one.</p>
+				<button class="button btn-alt text-center mt-1" onclick="window.location.href = '/'">Documentation</button>
 			</section>
 			
 			<section id="price">
