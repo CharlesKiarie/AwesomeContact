@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const express_enforces_ssl = require('express-enforces-ssl');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const path = require('path');
 
@@ -24,6 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended:false }));
+app.enable('trust proxy');
+app.use(express_enforces_ssl());
 
 app.use(session({
 	secret: 'LshSY_iwklaZuuIop',
