@@ -8,6 +8,27 @@ html {
 	min-height: 100vh;
 }
 
+.hero1 {
+	background-image: linear-gradient(to right, #6f1fc8 0%, #78c81f 100%);
+}
+
+.hero2 {
+	background: #7F00FF;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #E100FF, #7F00FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */	
+}
+
+.hero3 {
+	background: #DA22FF;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.hero4 {
+	background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+	min-height: 100vh;
+}
+
 .hide {
 	display: none;
 }
@@ -19,10 +40,6 @@ html {
 	padding: 0;
 }
 
-.color-purple {
-	color: #6f1fc8;
-}
-
 .text-center {
 	text-align: center;
 	margin: auto;
@@ -31,6 +48,10 @@ html {
 
 .text-white {
 	color: white
+}
+
+.text-main {
+	color: #6f1fc8; 
 }
 
 .highlight {
@@ -189,4 +210,12 @@ nav {
 
 .mt-1 {
 	margin-top: 20px;
+}
+
+.mb-1 {
+	margin-bottom: 20px;
+}
+
+.mb-2 {
+	margin-bottom: 40px;
 }
