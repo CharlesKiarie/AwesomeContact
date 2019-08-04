@@ -31,7 +31,7 @@ exports.postEmail = (req, res) => {
 
 	let thanks = req.body.thanks
 	if (thanks === null || thanks === undefined || thanks == "") {
-		thanks = "https://awesomecontact.me/thankyou/";
+		thanks = "http://awesomecontact.me/thankyou/";
 	}
 	
 
@@ -58,8 +58,8 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 	      return '"Awesome App" <' + transport._options.from + '>';
 	    },
 	    concatEmails: true, // Concatenate emails to the same addressee
-	    concatDelimiter: '<h1>{{{subject}}}</h1>', // Start each concatenated email with it's own subject
-	    template: MailTime.Template // Use default template
+	    concatDelimiter: '<h1>{{{subject}}}</h1>' // Start each concatenated email with it's own subject
+	    // template: MailTime.Template // Use default template
 	  });
 
 	// var mailOptions = {
@@ -71,11 +71,13 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 	// };
 
 	var mailOptions = {
-		from: fromEmail,
+		from: 'awesomeContact <admin@awesomecontact.me>',
 		to: toEmail,
 		subject: subject,
 		text: message,
-		html: `<p>${message}</p>`
+		html: `<p>${message}</p>
+				<p>From: ${fromEmail}</p>
+				`
 	};
 
 
