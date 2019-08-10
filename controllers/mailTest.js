@@ -39,8 +39,7 @@ exports.postEmail = (req, res) => {
 
 	//check if email is a paying user
 	//redirect to thank you page
-	res.redirect(301, thanks);
-	return res.end();
+	res.redirect(302, thanks);
 };
 
 const sendEmail = (toEmail, fromEmail, subject, message) => {
