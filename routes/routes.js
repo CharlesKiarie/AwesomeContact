@@ -10,6 +10,7 @@ const dashboardController = require('../controllers/dashboard');
 
 
 router.get('/', indexController.getIndex);
+router.get('/index', indexController.getIndex);
 router.get('/success', indexController.getSuccess);
 router.get('/error', indexController.getError);
 router.get('/billing', indexController.getBilling);
