@@ -35,56 +35,54 @@ exports.postEmail = (req, res) => {
 	}
 	
 
+	res.redirect(302, thanks);
 	sendEmail(toEmail, fromEmail, subject, message);
 
-	//check if email is a paying user
-	//redirect to thank you page
-	res.redirect(302, thanks);
 };
 
 const sendEmail = (toEmail, fromEmail, subject, message) => {
 
 	const db = getDb();
 
-	const mailQueue = new MailTime({
-	    db, 
-	    type: 'server',
-	    strategy: 'balancer', // Transports will be used in round robin chain
-	    transports,
-	    from(transport) {
-	      // To pass spam-filters `from` field should be correctly set
-	      // for each transport, check `transport` object for more options
-	      return '"Awesome App" <' + transport._options.from + '>';
-	    },
-	    concatEmails: true, // Concatenate emails to the same addressee
-	    concatDelimiter: '<h1>{{{subject}}}</h1>' // Start each concatenated email with it's own subject
-	    // template: MailTime.Template // Use default template
-	  });
+		const mailQueue = new MailTime({
+		    db, 
+		    type: 'server',
+		    strategy: 'balancer', // Transports will be used in round robin chain
+		    transports,
+		    from(transport) {
+		      // To pass spam-filters `from` field should be correctly set
+		      // for each transport, check `transport` object for more options
+		      return '"Awesome App" <' + transport._options.from + '>';
+		    },
+		    concatEmails: true, // Concatenate emails to the same addressee
+		    concatDelimiter: '<h1>{{{subject}}}</h1>' // Start each concatenated email with it's own subject
+		    // template: MailTime.Template // Use default template
+		  });
 
-	// var mailOptions = {
-	// 	from: 'Charles <kiariecharles77@gmail.com>',
-	// 	to: 'kiariecharles77@gmail.com',
-	// 	subject: 'This is from awesome contact mailt-time',
-	// 	text: `It works.`,
-	// 	html: `<p>It works</p>`
-	// };
+		// var mailOptions = {
+		// 	from: 'Charles <kiariecharles77@gmail.com>',
+		// 	to: 'kiariecharles77@gmail.com',
+		// 	subject: 'This is from awesome contact mailt-time',
+		// 	text: `It works.`,
+		// 	html: `<p>It works</p>`
+		// };
 
-	var mailOptions = {
-		from: 'awesomeContact <admin@awesomecontact.me>',
-		to: toEmail,
-		subject: subject,
-		text: message,
-		html: `<p>${message}</p>
-				<p>From: ${fromEmail}</p>
-				`
-	};
+		var mailOptions = {
+			from: 'awesomeContact <admin@awesomecontact.me>',
+			to: toEmail,
+			subject: subject,
+			text: message,
+			html: `<p>${message}</p>
+					<p>From: ${fromEmail}</p>
+					`
+		};
 
 
-	mailQueue.sendMail(mailOptions, function(error, info){
-		if(error){
-			console.log(error);
-		} else {
-			console.log('Message Sent: '+info.response);
-		}
-	});
+		mailQueue.sendMail(mailOptions, function(error, info){
+			if(error){
+				console.log(error);
+			} else {
+				console.log('Message Sent: '+info.response);
+			}
+		});
 };
