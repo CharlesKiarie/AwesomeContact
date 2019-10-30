@@ -15,27 +15,19 @@ transports.push(nodemailer.createTransport({
 	}
 }));
 
-// transports.push(nodemailer.createTransport({
-// service: 'Gmail',
-// 		auth: {
-// 			user: 'kiariecharles77@gmail.com',
-// 			pass: 'ilvdxpomydyyhfqz'
-// 		}
-// }));
-
 exports.postEmail = (req, res) => {
 	const toEmail = req.params.email;
 	const fromEmail = req.body.email;
 	const subject = req.body.subject;
 	const message = req.body.message;
 
-	let thanks = req.body.thanks
+	const thanks = req.body.thanks
 	if (thanks === null || thanks === undefined || thanks == "") {
 		thanks = "http://awesomecontact.me/thankyou/";
 	}
 	
 
-	res.redirect(302, thanks);
+	res.redirect(thanks);
 	sendEmail(toEmail, fromEmail, subject, message);
 
 };
@@ -59,14 +51,6 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 		    // template: MailTime.Template // Use default template
 		  });
 
-		// var mailOptions = {
-		// 	from: 'Charles <kiariecharles77@gmail.com>',
-		// 	to: 'kiariecharles77@gmail.com',
-		// 	subject: 'This is from awesome contact mailt-time',
-		// 	text: `It works.`,
-		// 	html: `<p>It works</p>`
-		// };
-
 		var mailOptions = {
 			from: 'awesomeContact <admin@awesomecontact.me>',
 			to: toEmail,
@@ -86,3 +70,11 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 			}
 		});
 };
+
+		// var mailOptions = {
+		// 	from: 'Charles <kiariecharles77@gmail.com>',
+		// 	to: 'kiariecharles77@gmail.com',
+		// 	subject: 'This is from awesome contact mailt-time',
+		// 	text: `It works.`,
+		// 	html: `<p>It works</p>`
+		// };
