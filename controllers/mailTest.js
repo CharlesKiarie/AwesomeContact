@@ -21,7 +21,7 @@ exports.postEmail = (req, res) => {
 	const subject = req.body.subject;
 	const message = req.body.message;
 
-	const thanks = req.body.thanks
+	let thanks = req.body.thanks
 	if (thanks === null || thanks === undefined || thanks == "") {
 		thanks = "http://awesomecontact.me/thankyou/";
 	}
@@ -38,7 +38,7 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 
 		const mailQueue = new MailTime({
 		    db, 
-		    type: 'server',
+		    type: 'client',
 		    strategy: 'balancer', // Transports will be used in round robin chain
 		    transports,
 		    from(transport) {
@@ -62,13 +62,7 @@ const sendEmail = (toEmail, fromEmail, subject, message) => {
 		};
 
 
-		mailQueue.sendMail(mailOptions, function(error, info){
-			if(error){
-				console.log(error);
-			} else {
-				console.log('Message Sent: '+info.response);
-			}
-		});
+		mailQueue.sendMail(mailOptions);
 };
 
 		// var mailOptions = {

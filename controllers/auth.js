@@ -1,7 +1,40 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const MailTime = require('mail-time');
 const validateSignup = require('../validation/signup');
 const validateLogin = require('../validation/login');
+
+const sendEmail = (email, subject, message) => {
+
+	const db = getDb();
+
+		const mailQueue = new MailTime({
+		    db, 
+		    type: 'client',
+		    strategy: 'balancer', // Transports will be used in round robin chain
+		    transports,
+		    from(transport) {
+		      // To pass spam-filters `from` field should be correctly set
+		      // for each transport, check `transport` object for more options
+		      return '"Awesome App" <' + transport._options.from + '>';
+		    },
+		    concatEmails: true, // Concatenate emails to the same addressee
+		    concatDelimiter: '<h1>{{{subject}}}</h1>' // Start each concatenated email with it's own subject
+		    // template: MailTime.Template // Use default template
+		  });
+
+		var mailOptions = {
+			from: 'awesomeContact <admin@awesomecontact.me>',
+			to: email,
+			subject: subject,
+			text: message,
+			html: message
+					
+		};
+
+
+		mailQueue.sendMail(mailOptions);
+};
 
 exports.getSignup = (req, res) => {
 	res.render('signup', {
@@ -13,6 +46,14 @@ exports.getSignup = (req, res) => {
 exports.postSignup = (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;
+	const myEmail =  'kiariecharles77@gmail.com';
+	const mySubject = 'Someone Signed up';
+	const myMsg = `${email} has signed up.`;
+	const subject = 'Welcome to awesomeContact.';
+	const msg = `	<p>Hello, Charles from awesomeContact here wanted to thank you for signing up and giving my little saas app a chance. You can find the documentation here: <a href="https://medium.com/@charleskiarie77/an-awesome-guide-to-getting-started-with-awesomecontact-471a7b68c297" target="_blank">Click me to read documentation</a> </p>
+					<p>If getting setup is still a problem please do get in touch for further assistance. You can contact me here: kiariecharles77@gmail.com</p>
+					<p>Also since my billing is not yet completly built out, after paying please do email me so I can manually activate your account.</p>
+					<p>My email: kiariecharles77@gmail.com or through awesomeContact's <a href="https://awesomecontact.me/contact" target="_blank">Contact me</a></p>`;
 	console.log(req.body);
 
 	const { errors, isValid } = validateSignup(req.body);
@@ -43,6 +84,8 @@ exports.postSignup = (req, res) => {
 			res.render('login', {
 				errors: errors
 			}); //Log in you account has been created
+			sendEmail(email, subject, msg);
+			sendEmail(myEmail, mySubject, myMsg)
 		});
 	})
 	.catch(err => {
@@ -102,7 +145,7 @@ exports.postLogin = (req, res) => {
 	})
 	.catch(err => {
 		console.log(err)
-		errors.server = "Server is down please try again2.";
+		errors.server = "Server is down please try again.";
 		return res.render('login', {
      		errors: errors
      	});
@@ -115,3 +158,4 @@ exports.postLogout = (req, res, next) => {
     res.status(303).redirect('/');
   });
 };
+
