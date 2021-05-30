@@ -1,6 +1,6 @@
 # AwesomeContact - A simple backend-service to process your contact forms...
 
-This project was built to expose a simple endpoint that contact forms can post to a bit of back-end magic amd boom you recieve an email in your desired email service linked to said enpoint. We then could redirect the user to a custom html page you specified or a default one hosted by AwesomeContact.
+This project was built to expose a simple endpoint that contact forms can post to, a bit of back-end magic on my end and boom you recieve an email in your desired email service linked to said enpoint. We then could redirect the user to a custom html page you specified or a default one hosted by AwesomeContact.
 
 `[https://awesomecontact/asHSYUS76887ahsgdyts/]`
 
@@ -13,13 +13,21 @@ This project was built to expose a simple endpoint that contact forms can post t
 - MongoDB(Mongodb Atlas)
 - express, express-validator, express-sessions
 
+## TLDR: What I built
+
+- The sign up and login with bcrypt.
+- The contact form endpoint users would post to.
+- Custom validation for all input fields
+- Mongodb managed sessions
+
+
 ## Notes & Considerations
 
-An ambitious project to build something from scratch....I implemented the mvp with custom sign up and logins and realised I never want to do that on my own ever again it was suxh a headache. Most recent project I am using passport and google for authentication.
+An ambitious project to build something from scratch....I implemented the mvp with custom sign up and login workflow and realised I never want to do that on my own ever again it was such a headache. Most recent project I am using passport and google for authentication.
 
-I forgot my email and password
+I forgot my email and password should have implemented a change password feature for this.... facepalm T_T
 
-The app used aws-ses to send emails to users and all the logic going into managing who an email belongs(a user) and a user can have many emails registered to awesomeContacts endpoints and they could have many thank-you pages.
+The app used aws-ses to send emails to users and all the logic going into managing who an email belongs to(a user) and a how user can have many emails registered to awesomeContacts endpoints and they could have many thank-you pages.
 
 To prevent losing emails to wierd edge case bugs I used a mailer queue that always ensured a processed contact form's data would always be saved on a mongodb database then processed and sent by the mailer using nodemailer through aws-ses services.
 
@@ -27,10 +35,11 @@ To prevent losing emails to wierd edge case bugs I used a mailer queue that alwa
 
 - I had no way to process subscription payments not a lot of payment platforms like stripe in Africa :(
 - I got a job(this project helped)
-- I was **embarrassed** of what I built(good ol' imposter syndrome)
+- I was **embarrassed** of what I had built(good ol' imposter syndrome)
 - I never wrote proper documentation for it on launch it was a medium post I wrote up explaining how to set it up.
+- Production workflow was a chore and needed optimisations
 
-## Will i be relaunching it?
+## Will I be relaunching it?
 
 Yes, definitely learnt a lot gonna use paypal to charge customers. I will have to rebuild the UI again and include proper beautiful documentation.
 
@@ -46,7 +55,7 @@ Implemented with bcrypt and good ol' validation and custom sign up management co
 
 ![Signup page](https://drive.google.com/uc?export=view&id=12_s1FQlumyW7NjSXSYO8D2lhOLFDlFr9)
 
-Yes, I love lucky star...awesomeContacts default thank you page
+Yes, I love lucky star...awesomeContacts default thank you page(weeb inspired)
 
 ![Thankyou page](https://drive.google.com/uc?export=view&id=1AEFh_O6IeiHf8D7B_dwIu-kOCoTAzFdt)
 
